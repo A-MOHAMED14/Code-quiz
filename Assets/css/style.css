@@ -4,6 +4,14 @@
   margin: 0;
 }
 
+/* BODY STYLING */
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
 /* HEADER STYLING */
 
 header {
@@ -18,4 +26,45 @@ header #highscore {
 
 header #timer {
   margin-right: 10px;
+}
+
+/* START QUIZ CONTAINER STYLING */
+
+#quiz-intro-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 70px;
+}
+
+#quiz-intro-container h1,
+#quiz-intro-container p,
+#quiz-intro-container form input {
+  width: 100%;
+}
+
+#quiz-intro-container h1 {
+  text-align: center;
+}
+
+#quiz-intro-container p {
+  margin-top: 50px;
+  text-align: center;
+}
+
+#quiz-intro-container form input {
+  margin-top: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+  background-color: #007bff;
+  color: white;
+}
+
+#quiz-intro-container form input:hover {
+  background-color: #0056b3;
 }
