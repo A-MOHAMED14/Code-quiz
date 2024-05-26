@@ -52,6 +52,7 @@ header .timer {
 .quiz-intro-container p {
   margin-top: 50px;
   text-align: center;
+  line-height: 1.6;
 }
 
 .quiz-intro-container form input {
