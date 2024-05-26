@@ -20,17 +20,17 @@ header {
   margin-top: 10px;
 }
 
-header #highscore {
+header .highscore {
   margin-left: 10px;
 }
 
-header #timer {
+header .timer {
   margin-right: 10px;
 }
 
 /* START QUIZ CONTAINER STYLING */
 
-#quiz-intro-container {
+.quiz-intro-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,22 +39,22 @@ header #timer {
   margin-top: 100px;
 }
 
-#quiz-intro-container h1,
-#quiz-intro-container p,
-#quiz-intro-container form input {
+.quiz-intro-container h1,
+.quiz-intro-container p,
+.quiz-intro-container form input {
   width: 100%;
 }
 
-#quiz-intro-container h1 {
+.quiz-intro-container h1 {
   text-align: center;
 }
 
-#quiz-intro-container p {
+.quiz-intro-container p {
   margin-top: 50px;
   text-align: center;
 }
 
-#quiz-intro-container form input {
+.quiz-intro-container form input {
   margin-top: 50px;
   padding: 10px;
   border-radius: 10px;
@@ -65,6 +65,6 @@ header #timer {
   color: white;
 }
 
-#quiz-intro-container form input:hover {
+.quiz-intro-container form input:hover {
   background-color: #0056b3;
 }
