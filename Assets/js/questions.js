@@ -45,6 +45,7 @@ const timer = document.querySelector(".timer");
 const questionContainer = document.querySelector("#question-container");
 const quizQuestion = document.querySelector("#question");
 const answerButtons = document.querySelectorAll(".answer-btn");
+const singleAnswerBtn = document.querySelector("#answer-btn");
 const buttonsContainer = document.querySelector("#answers");
 
 startButton.addEventListener("click", (event) => {
@@ -58,34 +59,60 @@ startButton.addEventListener("click", (event) => {
       clearInterval(reduceTimer);
     }
   }, 1000);
-
   quizIntro.textContent = "";
-
-  quizQuestion.textContent = `${questions[0].title}`;
-  quizQuestion.setAttribute("style", "text-align: center");
-
-  answerButtons.forEach((button, i) => {
-    button.textContent = `(${i + 1}). ${questions[0].choices[i]}`;
-  });
 });
 
-// correctAnswer = questions[0].answer;
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+let currentQuestionIndex = 0;
 
-// if (event.target === correctAnswer) {
-//   alert("CORRECT!");
-// }
+showQuestion();
 
-// element = event.target;
+function showQuestion() {
+  quizQuestion.textContent = `${questions[currentQuestionIndex].title}`;
+  quizQuestion.setAttribute("style", "text-align: left");
 
-// if (element.matches("#start-btn")) {
-//   state = quizQuestion.getAttribute("data-state");
-//   console.log(state, "<-------");
-// }
+  answerButtons.forEach((button, i) => {
+    button.textContent = `${questions[currentQuestionIndex].choices[i]}`;
 
-// quizQuestion.textContent = `Q1: ${questions[0].title}`;
-// questions[0].choices.forEach((choice) => {
-//   answers.textContent = choice;
-// });
+    buttonsContainer.setAttribute(
+      "style",
+      "text-align: left; margin-top: 20px; list-style:none"
+    );
+    button.setAttribute(
+      "style",
+      "text-align: left; padding: 7px; font-size: 1.5rem; margin: 3px 0; border-radius: 5px; border: none; background-color: #007bff; color: white"
+    );
+
+    button.onclick = handleAnswerClick;
+  });
+
+  questionContainer.setAttribute(
+    "style",
+    "text-align: center; margin: 0 auto; width: 50%"
+  );
+}
+
+// handle the selected answer
+function handleAnswerClick(event) {
+  const currentQuestion = questions[currentQuestionIndex];
+  selectedAnswer = event.target.textContent;
+
+  if (selectedAnswer === currentQuestion.answer) {
+    console.log("Correct answer!");
+  } else {
+    console.log("Wrong answer!");
+    countdown -= 10;
+  }
+}
+
+// Move on to the next question
+currentQuestionIndex++;
+
+if (currentQuestionIndex < questions.length) {
+  showQuestion();
+} else {
+  alert("End of quiz");
+}
 
 // ------------------ FEEDBACK -------------------
 // button.addEventListener("click", (event) => {
@@ -104,4 +131,65 @@ startButton.addEventListener("click", (event) => {
 //     questionContainer.appendChild(horizontalLine);
 //     questionContainer.appendChild(wrongResponse);
 //   }
+// });
+
+// --------------------- QUIZ INTRO --------------------
+// quizIntro.textContent = "";
+
+// quizQuestion.textContent = `${questions[0].title}`;
+// quizQuestion.setAttribute("style", "text-align: left");
+
+// answerButtons.forEach((button, j) => {
+//   button.textContent = `${j + 1}). ${questions[0].choices[j]}`;
+
+//   let questionNumber = 0;
+
+//   buttonsContainer.setAttribute(
+//     "style",
+//     "text-align: left; margin-top: 20px; list-style:none"
+//   );
+//   button.setAttribute(
+//     "style",
+//     "text-align: left; padding: 7px; font-size: 1.5rem; margin: 3px 0; border-radius: 5px; border: none; background-color: #007bff; color: white"
+//   );
+// });
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// questionContainer.setAttribute(
+//   "style",
+//   "text-align: center; margin: 0 auto; width: 50%"
+// );
+
+// singleAnswerBtn.addEventListener("click", () => {
+//   alert("Next Question");
+//   // When one of the answer buttons is pressed, go to the next question
+//   button.addEventListener("click", (event) => {
+//     // alert("Next question");
+//     // function nextQuestion() {
+//     let questionNum = 2;
+//     let questionNumIndex = 1;
+
+//     while (questionNum <= questions.length) {
+//       quizQuestion.textContent = `${questions[questionNumIndex].title}`;
+//     }
+//     // }
+//     // nextQuestion();
+//   });
+// });
+
+// correctAnswer = questions[0].answer;
+
+// if (event.target === correctAnswer) {
+//   alert("CORRECT!");
+// }
+
+// element = event.target;
+
+// if (element.matches("#start-btn")) {
+//   state = quizQuestion.getAttribute("data-state");
+//   console.log(state, "<-------");
+// }
+
+// quizQuestion.textContent = `Q1: ${questions[0].title}`;
+// questions[0].choices.forEach((choice) => {
+//   answers.textContent = choice;
 // });
