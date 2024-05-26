@@ -1,7 +1,10 @@
+/* UNIVERSAL STYLING */
 * {
   padding: 0;
   margin: 0;
 }
+
+/* HEADER STYLING */
 
 header {
   display: flex;
