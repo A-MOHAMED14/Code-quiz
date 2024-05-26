@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+header #highscore {
+  margin-left: 10px;
+}
+
+header #timer {
+  margin-right: 10px;
+}
