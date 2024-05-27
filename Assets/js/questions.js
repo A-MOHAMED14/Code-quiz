@@ -221,11 +221,23 @@ quizEndButton.addEventListener("click", (event) => {
 
     highScoresContainer.setAttribute(
       "style",
-      "display: contents; text-align: center; margin: 0 auto; width: 50%"
+      "display: block; text-align: center; margin: 0 auto; width: 50%"
     );
-    highscoresHeader.setAttribute("style", "margin-bottom: 20px");
-    goBackBtn.setAttribute("style", "text-align: center");
-    clearScoreBtn.setAttribute("style", "text-align: center");
+    highscoresHeader.setAttribute("style", "margin-bottom: 30px");
+
+    highscoresList.setAttribute(
+      "style",
+      "list-style: none; margin-bottom: 30px"
+    );
+
+    goBackBtn.setAttribute(
+      "style",
+      "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 7px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 5px"
+    );
+    clearScoreBtn.setAttribute(
+      "style",
+      "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 7px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 5px"
+    );
 
     // Loop through the properties of the local storage object, for each property, create a new li
 
@@ -239,6 +251,10 @@ quizEndButton.addEventListener("click", (event) => {
         const scoresList = document.createElement("li");
         highscoresList.append(scoresList);
         scoresList.textContent = `${key} - ${currentPlayerScore}`;
+        scoresList.setAttribute(
+          "style",
+          "padding: 5px 0; margin: 10px 10px; background-color: #c8e3ff; border: none; border-radius: 5px"
+        );
       }
     }
   }
