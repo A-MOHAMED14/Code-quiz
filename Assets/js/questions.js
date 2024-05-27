@@ -35,6 +35,7 @@ var questions = [
 ];
 
 // Quiz Intro elements
+const homePage = document.querySelector("#home-page-container");
 const scoresTimer = document.querySelector("#score-timer-container");
 const quizIntro = document.querySelector("#quiz-intro-container");
 const startButton = document.querySelector("#start-btn");
@@ -260,8 +261,13 @@ quizEndButton.addEventListener("click", (event) => {
   }
 });
 
-// If the clear button is pressed, simply remove all key value pairs from the local storage object
-// localStorage.clear();
+// If Go back button is clicked, show quiz intro content
+
+goBackBtn.addEventListener("click", () => {
+  goBackBtn.setAttribute("href", "http://127.0.0.1:3000/index.html");
+});
+
+// If the clear button is clicked, simply remove all key value pairs from the local storage object
 
 clearScoreBtn.addEventListener("click", () => {
   localStorage.clear();
