@@ -44,28 +44,30 @@ const timer = document.querySelector(".timer");
 
 const questionContainer = document.querySelector("#question-container");
 const quizQuestion = document.querySelector("#question");
-const answerButtons = document.querySelectorAll(".answer-btn");
-const singleAnswerBtn = document.querySelector("#answer-btn");
 const buttonsContainer = document.querySelector("#answers");
+const answerButtons = document.querySelectorAll(".answer-btn");
+
+let countdown = 60;
+let currentQuestionIndex = 0;
+let totalScore = 0;
+let highscores = [];
 
 startButton.addEventListener("click", (event) => {
-  let countdown = 60;
-
   const reduceTimer = setInterval(() => {
     if (countdown > 0) {
       countdown--;
       timer.textContent = `Time remaining ⏳: ${countdown} s`;
     } else {
       clearInterval(reduceTimer);
+      // alert("You have ran out of time");
     }
   }, 1000);
+
   quizIntro.textContent = "";
+  showQuestion();
 });
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////
-let currentQuestionIndex = 0;
-
-showQuestion();
 
 function showQuestion() {
   quizQuestion.textContent = `${questions[currentQuestionIndex].title}`;
@@ -93,25 +95,28 @@ function showQuestion() {
 }
 
 // handle the selected answer
+
 function handleAnswerClick(event) {
   const currentQuestion = questions[currentQuestionIndex];
   selectedAnswer = event.target.textContent;
+  console.log(selectedAnswer, "<------ Selected Answer");
+  console.log(currentQuestion.answer, "***** The answer on the object");
 
   if (selectedAnswer === currentQuestion.answer) {
-    console.log("Correct answer!");
+    totalScore += 10;
   } else {
-    console.log("Wrong answer!");
     countdown -= 10;
   }
-}
 
-// Move on to the next question
-currentQuestionIndex++;
+  // When a button is clicked, move on to the next question
+  currentQuestionIndex++;
 
-if (currentQuestionIndex < questions.length) {
-  showQuestion();
-} else {
-  alert("End of quiz");
+  if (currentQuestionIndex < questions.length) {
+    showQuestion();
+  } else {
+    alert(`End Of Quiz, you scored: ${totalScore}/50`);
+    countdown = 0;
+  }
 }
 
 // ------------------ FEEDBACK -------------------
