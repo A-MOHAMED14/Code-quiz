@@ -13,7 +13,7 @@
     <title>Code Quiz</title>
   </head>
   <body>
-    <header>
+    <header id="score-timer-container">
       <p class="highscore">View Highscores</p>
       <p class="timer">Time remaining ⏳: 0</p>
     </header>
@@ -32,12 +32,12 @@
     </div>
 
     <div id="question-container">
-      <h2 id="question" data-state="hidden"></h2>
+      <h2 id="question" style="display: none"></h2>
       <ul id="answers">
-        <li><button class="answer-btn" data-state="hidden"></button></li>
-        <li><button class="answer-btn" data-state="hidden"></button></li>
-        <li><button class="answer-btn" data-state="hidden"></button></li>
-        <li><button class="answer-btn" data-state="hidden"></button></li>
+        <li><button class="answer-btn"></button></li>
+        <li><button class="answer-btn"></button></li>
+        <li><button class="answer-btn"></button></li>
+        <li><button class="answer-btn"></button></li>
       </ul>
     </div>
 
@@ -47,9 +47,16 @@
       <p id="quiz-feedback"></p>
       <form>
         <label for="initials">Enter initilas:</label>
-        <input type="text" name="intials" id="initials"/>
+        <input type="text" name="intials" id="initials" />
         <button id="end-btn">Submit</button>
       </form>
+    </div>
+
+    <div id="high-scores-list-container" style="display: none">
+      <h2 id="high-scores">High Scores</h2>
+      <ul id="high-scores-list"></ul>
+      <button id="go-back-btn">Go Back</button> 
+      <button id="clear-scores-btn">Clear High Scores</button>
     </div>
     <script src="./Assets/js/questions.js"></script>
   </body>
