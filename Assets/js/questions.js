@@ -47,6 +47,14 @@ const quizQuestion = document.querySelector("#question");
 const buttonsContainer = document.querySelector("#answers");
 const answerButtons = document.querySelectorAll(".answer-btn");
 
+// End of quiz elements
+const quizEndContainer = document.querySelector("#end-of-quiz-container");
+const endQuizHeader = document.querySelector("#end-of-quiz");
+const playerScore = document.querySelector("#player-score");
+const quizFeedback = document.querySelector("#quiz-feedback");
+const initialsInput = document.querySelector("#initials");
+const quizEndButton = document.querySelector("#end-btn");
+
 let countdown = 60;
 let currentQuestionIndex = 0;
 let totalScore = 0;
@@ -59,16 +67,13 @@ startButton.addEventListener("click", (event) => {
       timer.textContent = `Time remaining ⏳: ${countdown} s`;
     } else {
       clearInterval(reduceTimer);
-      // alert("You have ran out of time");
     }
   }, 1000);
 
   quizIntro.textContent = "";
   showQuestion();
 });
-
-// /////////////////////////////////////////////////////////////////////////////////////////////////
-
+// ----------------------------------------------------------------------------------------------------
 function showQuestion() {
   quizQuestion.textContent = `${questions[currentQuestionIndex].title}`;
   quizQuestion.setAttribute("style", "text-align: left");
@@ -100,7 +105,7 @@ function handleAnswerClick(event) {
   const currentQuestion = questions[currentQuestionIndex];
   selectedAnswer = event.target.textContent;
   console.log(selectedAnswer, "<------ Selected Answer");
-  console.log(currentQuestion.answer, "***** The answer on the object");
+  console.log(currentQuestion.answer, "***** The correct answer");
 
   if (selectedAnswer === currentQuestion.answer) {
     totalScore += 10;
@@ -114,10 +119,57 @@ function handleAnswerClick(event) {
   if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
-    alert(`End Of Quiz, you scored: ${totalScore}/50`);
     countdown = 0;
+    // If quiz or time has invoke endOfQuiz funtion
+    endOfQuiz();
   }
 }
+
+// ----------------------------------------------------------------------------------------------------
+
+// Once quiz ends, display users score, feedback and get their initials
+function endOfQuiz() {
+  quizIntro.textContent = "";
+  questionContainer.textContent = "";
+
+  playerScore.textContent = `You scored ${totalScore}/50`;
+  // Provide feedback based on score
+  if (totalScore === 50) {
+    quizFeedback.textContent = "You smashed it! 💯 Outstanding performance! 🌟";
+  } else if (totalScore === 40) {
+    quizFeedback.textContent =
+      "Great job! 👍 You have a strong understanding of the material. 💪";
+  } else if (totalScore === 30) {
+    quizFeedback.textContent =
+      "Good effort! 😊 You have a good grasp of the material, but there's room for improvement. 📘";
+  } else if (totalScore === 20) {
+    quizFeedback.textContent =
+      "Not bad! 😌 You have a basic understanding, but you might want to review some concepts. 📚";
+  } else if (totalScore === 10) {
+    quizFeedback.textContent =
+      "Keep trying! 💡 There's some understanding, but more study is needed. 📖";
+  } else {
+    quizFeedback.textContent =
+      "Don't give up! 💪 Review the material and try again. 🌱";
+  }
+
+  quizEndContainer.setAttribute(
+    "style",
+    "display: contents; text-align: center; margin: 0 auto; width: 50%"
+  );
+
+  endQuizHeader.setAttribute("style", "margin: 0 0 40px 0");
+  quizFeedback.setAttribute("style", "margin: 20px 0");
+  initialsInput.setAttribute(
+    "style",
+    "margin: 20px 0; padding: 7px; border-radius: 5px; font-size: 1.2rem"
+  );
+  quizEndButton.setAttribute(
+    "style",
+    "font-size: 1.2rem; font-weight: bold; margin-left: 15px; padding: 7px; color: white; background-color: #007bff; border: none; border-radius: 5px"
+  );
+}
+// ----------------------------------------------------------------------------------------------------
 
 // ------------------ FEEDBACK -------------------
 // button.addEventListener("click", (event) => {
