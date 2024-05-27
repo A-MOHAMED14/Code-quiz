@@ -58,7 +58,6 @@ const quizEndButton = document.querySelector("#end-btn");
 let countdown = 60;
 let currentQuestionIndex = 0;
 let totalScore = 0;
-let highscores = [];
 
 startButton.addEventListener("click", (event) => {
   const reduceTimer = setInterval(() => {
@@ -67,6 +66,7 @@ startButton.addEventListener("click", (event) => {
       timer.textContent = `Time remaining ⏳: ${countdown} s`;
     } else {
       clearInterval(reduceTimer);
+      endOfQuiz();
     }
   }, 1000);
 
@@ -127,7 +127,7 @@ function handleAnswerClick(event) {
 
 // ----------------------------------------------------------------------------------------------------
 
-// Once quiz ends, display users score, feedback and get their initials
+// Once quiz ends, display users score, quiz feedback and get their initials
 function endOfQuiz() {
   quizIntro.textContent = "";
   questionContainer.textContent = "";
