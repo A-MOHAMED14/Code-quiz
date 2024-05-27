@@ -34,14 +34,12 @@ var questions = [
   },
 ];
 
-// When "start quiz" button is clicked:
-// 1. start timer
-// 2. show first question
-
+// Quiz Intro elements
 const quizIntro = document.querySelector("#quiz-intro-container");
 const startButton = document.querySelector("#start-btn");
 const timer = document.querySelector(".timer");
 
+// Quiz questions elements
 const questionContainer = document.querySelector("#question-container");
 const quizQuestion = document.querySelector("#question");
 const buttonsContainer = document.querySelector("#answers");
@@ -54,10 +52,16 @@ const playerScore = document.querySelector("#player-score");
 const quizFeedback = document.querySelector("#quiz-feedback");
 const initialsInput = document.querySelector("#initials");
 const quizEndButton = document.querySelector("#end-btn");
+// ----------------------------------------------------------------------------------------------------
 
 let countdown = 60;
 let currentQuestionIndex = 0;
 let totalScore = 0;
+
+// ----------------------------------------------------------------------------------------------------
+// When "start quiz" button is clicked:
+// 1. start timer
+// 2. show first question
 
 startButton.addEventListener("click", (event) => {
   const reduceTimer = setInterval(() => {
@@ -73,7 +77,10 @@ startButton.addEventListener("click", (event) => {
   quizIntro.textContent = "";
   showQuestion();
 });
+
 // ----------------------------------------------------------------------------------------------------
+// Functionality to show next question when one of the answer buttons is clicked
+
 function showQuestion() {
   quizQuestion.textContent = `${questions[currentQuestionIndex].title}`;
   quizQuestion.setAttribute("style", "text-align: left");
@@ -120,19 +127,22 @@ function handleAnswerClick(event) {
     showQuestion();
   } else {
     countdown = 0;
-    // If quiz or time has invoke endOfQuiz funtion
+    // If quiz or timer has ended invoke endOfQuiz funtion
     endOfQuiz();
   }
 }
 
 // ----------------------------------------------------------------------------------------------------
+let currentPlayerId = 0;
 
 // Once quiz ends, display users score, quiz feedback and get their initials
+
 function endOfQuiz() {
   quizIntro.textContent = "";
   questionContainer.textContent = "";
 
   playerScore.textContent = `You scored ${totalScore}/50`;
+
   // Provide feedback based on score
   if (totalScore === 50) {
     quizFeedback.textContent = "You smashed it! 💯 Outstanding performance! 🌟";
@@ -167,6 +177,15 @@ function endOfQuiz() {
   quizEndButton.setAttribute(
     "style",
     "font-size: 1.2rem; font-weight: bold; margin-left: 15px; padding: 7px; color: white; background-color: #007bff; border: none; border-radius: 5px"
+  );
+
+  // localStorage.clear();
+
+  // Store users score into the local storage object
+  currentPlayerId++;
+  localStorage.setItem(`player${currentPlayerId}Score`, totalScore);
+  const currentPlayerScore = localStorage.getItem(
+    `player${currentPlayerId}Score`
   );
 }
 // ----------------------------------------------------------------------------------------------------
