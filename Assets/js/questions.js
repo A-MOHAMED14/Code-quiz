@@ -182,11 +182,55 @@ function endOfQuiz() {
   // localStorage.clear();
 
   // Store users score into the local storage object
-  currentPlayerId++;
-  localStorage.setItem(`player${currentPlayerId}Score`, totalScore);
-  const currentPlayerScore = localStorage.getItem(
-    `player${currentPlayerId}Score`
-  );
+
+  // currentPlayerId++;
+  // localStorage.setItem(`player${currentPlayerId}Score`, totalScore);
+  // console.log(localStorage, "*** All the saved scores");
 }
 // ----------------------------------------------------------------------------------------------------
+const highScoresContainer = document.querySelector(
+  "#high-scores-list-container"
+);
+const highscoresList = document.querySelector("#high-scores-list");
+const goBackBtn = document.querySelector("#go-back-btn");
+const clearScoreBtn = document.querySelector("#clear-scores-btn");
 
+// When the user selects the submit button, they are presented with the highscores list
+
+// let playerData = [];
+
+quizEndButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  showHighScores();
+
+  function showHighScores() {
+    // Retreive the players initials
+    const playerInitials = document.querySelector("#initials").value;
+
+    // Store the players score to the local storage object
+    localStorage.setItem(`player_${playerInitials}'s_Score`, totalScore);
+
+    console.log(totalScore, "***** Player quiz score");
+    console.log(playerInitials, "<---- Player initials");
+    console.log(localStorage, "<<<<< Local storage object");
+
+    quizIntro.textContent = "";
+    questionContainer.textContent = "";
+    quizEndContainer.textContent = "";
+
+    highScoresContainer.setAttribute(
+      "style",
+      "display: contents; text-align: center; margin: 0 auto; width: 50%"
+    );
+    goBackBtn.setAttribute("style", "text-align: center");
+    clearScoreBtn.setAttribute("style", "text-align: center");
+
+    let currentPlayerScore = parseInt(
+      localStorage.getItem(`player_${playerInitials}'s_Score`)
+    );
+
+    const scoresList = document.createElement("li");
+    highscoresList.append(scoresList);
+    scoresList.textContent = `${playerInitials} - ${currentPlayerScore}`;
+  }
+});
