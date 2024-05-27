@@ -208,11 +208,11 @@ quizEndButton.addEventListener("click", (event) => {
     const playerInitials = document.querySelector("#initials").value;
 
     // Store the players score to the local storage object
-    localStorage.setItem(`player_${playerInitials}'s_Score`, totalScore);
+    localStorage.setItem(playerInitials, totalScore);
 
     console.log(totalScore, "***** Player quiz score");
     console.log(playerInitials, "<---- Player initials");
-    console.log(localStorage, "<<<<< Local storage object");
+    // console.log(localStorage, "<<<<< Local storage object");
 
     quizIntro.textContent = "";
     questionContainer.textContent = "";
@@ -225,12 +225,24 @@ quizEndButton.addEventListener("click", (event) => {
     goBackBtn.setAttribute("style", "text-align: center");
     clearScoreBtn.setAttribute("style", "text-align: center");
 
-    let currentPlayerScore = parseInt(
-      localStorage.getItem(`player_${playerInitials}'s_Score`)
-    );
+    // Loop through the properties of the local storage object, for each property, create a new li
 
-    const scoresList = document.createElement("li");
-    highscoresList.append(scoresList);
-    scoresList.textContent = `${playerInitials} - ${currentPlayerScore}`;
+    let allPlayers = localStorage; // Object containing all players intials & scores
+    console.log(allPlayers, "<----- All players initials and scores");
+
+    for (const key in allPlayers) {
+      if (key.length === 2) {
+        console.log(key, "<=== All property keys");
+        let currentPlayerScore = parseInt(localStorage.getItem(key));
+
+        const scoresList = document.createElement("li");
+        highscoresList.append(scoresList);
+        scoresList.textContent = `${key} - ${currentPlayerScore}`;
+      }
+    }
   }
 });
+
+// STORE EACH KEY VALUE PAIR INTO AN ARRAY, THEN LOOP OVER THE ARRAY TO ADD A NEW LI AND UPDATE THE LIST
+
+// Store all players initials and score into an
