@@ -13,22 +13,24 @@
     <title>Code Quiz</title>
   </head>
   <body>
-    <header id="score-timer-container">
-      <p class="highscore">View Highscores</p>
-      <p class="timer">Time remaining ⏳: 0</p>
-    </header>
+    <div id="home-page-container">
+      <header id="score-timer-container">
+        <p class="highscore">View Highscores</p>
+        <p class="timer">Time remaining ⏳: 0</p>
+      </header>
 
-    <div id="quiz-intro-container">
-      <h1>Coding Quiz Challenge</h1>
-      <p>
-        Try to answer the following code-related questions within the time
-        limit. <br />
-        Keep in mind that incorrect answers will penalize your scoretime by 10
-        seconds!
-      </p>
-      <form>
-        <input type="button" value="Start Quiz" id="start-btn" />
-      </form>
+      <div id="quiz-intro-container">
+        <h1>Coding Quiz Challenge</h1>
+        <p>
+          Try to answer the following code-related questions within the time
+          limit. <br />
+          Keep in mind that incorrect answers will penalize your scoretime by 10
+          seconds!
+        </p>
+        <form>
+          <input type="button" value="Start Quiz" id="start-btn" />
+        </form>
+      </div>
     </div>
 
     <div id="question-container">
@@ -55,7 +57,12 @@
     <div id="high-scores-list-container" style="display: none">
       <h2 id="high-scores">High Scores</h2>
       <ul id="high-scores-list"></ul>
-      <button id="go-back-btn">Go Back</button> 
+
+      <button id="go-back-btn">
+        <a href="" style="color: white" style="text-decoration: none"
+          >Go Back</a
+        >
+      </button>
       <button id="clear-scores-btn">Clear High Scores</button>
     </div>
     <script src="./Assets/js/questions.js"></script>
