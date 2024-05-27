@@ -35,6 +35,7 @@ var questions = [
 ];
 
 // Quiz Intro elements
+const scoresTimer = document.querySelector("#score-timer-container");
 const quizIntro = document.querySelector("#quiz-intro-container");
 const startButton = document.querySelector("#start-btn");
 const timer = document.querySelector(".timer");
@@ -191,13 +192,12 @@ function endOfQuiz() {
 const highScoresContainer = document.querySelector(
   "#high-scores-list-container"
 );
+const highscoresHeader = document.querySelector("#high-scores");
 const highscoresList = document.querySelector("#high-scores-list");
 const goBackBtn = document.querySelector("#go-back-btn");
 const clearScoreBtn = document.querySelector("#clear-scores-btn");
 
 // When the user selects the submit button, they are presented with the highscores list
-
-// let playerData = [];
 
 quizEndButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -214,6 +214,7 @@ quizEndButton.addEventListener("click", (event) => {
     console.log(playerInitials, "<---- Player initials");
     // console.log(localStorage, "<<<<< Local storage object");
 
+    scoresTimer.textContent = "";
     quizIntro.textContent = "";
     questionContainer.textContent = "";
     quizEndContainer.textContent = "";
@@ -222,13 +223,13 @@ quizEndButton.addEventListener("click", (event) => {
       "style",
       "display: contents; text-align: center; margin: 0 auto; width: 50%"
     );
+    highscoresHeader.setAttribute("style", "margin-bottom: 20px");
     goBackBtn.setAttribute("style", "text-align: center");
     clearScoreBtn.setAttribute("style", "text-align: center");
 
     // Loop through the properties of the local storage object, for each property, create a new li
 
-    let allPlayers = localStorage; // Object containing all players intials & scores
-    console.log(allPlayers, "<----- All players initials and scores");
+    let allPlayers = localStorage;
 
     for (const key in allPlayers) {
       if (key.length === 2) {
@@ -243,6 +244,5 @@ quizEndButton.addEventListener("click", (event) => {
   }
 });
 
-// STORE EACH KEY VALUE PAIR INTO AN ARRAY, THEN LOOP OVER THE ARRAY TO ADD A NEW LI AND UPDATE THE LIST
-
-// Store all players initials and score into an
+// If the clear button is pressed, simply remove all key value pairs from the local storage object
+// localStorage.clear();
