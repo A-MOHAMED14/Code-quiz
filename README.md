@@ -17,3 +17,10 @@ To visit the live website, <a href="">click here</a>
 - **Game Over Conditions:** The quiz ends either when all questions are answered or when the timer reaches zero, ensuring that users have a clear indication of when the game concludes.
 
 - **Score Saving Functionality:** Upon completion of the quiz, users are prompted to save their initials and their score, allowing them to track their performance and compete with others.
+
+## Website Preview
+
+![website preview snippet](./Assets/screenshots/web-screenshot-1.png)
+![website preview snippet](./Assets/screenshots/web-screenshot-2.png)
+![website preview snippet](./Assets/screenshots/web-screenshot-3.png)
+![website preview snippet](./Assets/screenshots/web-screenshot-4.png)
