@@ -22,10 +22,28 @@ header {
 
 header .highscore {
   margin-left: 10px;
+  border: none;
+  background-color: white;
+}
+
+header .highscore a {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+header .highscore:hover a {
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: underline;
 }
 
 header .timer {
   margin-right: 10px;
+  font-weight: bold;
 }
 
 /* START QUIZ CONTAINER STYLING */
