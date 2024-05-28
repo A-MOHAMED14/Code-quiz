@@ -232,3 +232,6 @@ clearScoreBtn.addEventListener("click", () => {
   localStorage.clear();
   highscoresList.textContent = "";
 });
+
+// LAST THING TO DO:
+//Add the highscores to it's own HTML and JS files so that when the user clicks on the view highscores button, they are redirected to the highscores.html file.
