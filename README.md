@@ -24,3 +24,7 @@ To visit the live website, <a href="">click here</a>
 ![website preview snippet](./Assets/screenshots/web-screenshot-2.png)
 ![website preview snippet](./Assets/screenshots/web-screenshot-3.png)
 ![website preview snippet](./Assets/screenshots/web-screenshot-4.png)
+
+## Code Preview
+
+![code preview snippet](./Assets/screenshots/code-screenshot.png)
