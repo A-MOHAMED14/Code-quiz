@@ -6,7 +6,7 @@ The goal of this project is to build a timed coding quiz with multiple choice qu
 
 ## Live Demo
 
-To visit the live website, <a href="https://a-mohamed14.github.io/Code-quiz/">click here</a>
+To access the live website, <a href="https://a-mohamed14.github.io/Code-quiz/">click here</a>
 
 ## Key Features And Accomplishments
 
