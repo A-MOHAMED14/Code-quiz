@@ -2,8 +2,9 @@
 const homePage = document.querySelector("#home-page-container");
 const scoresTimer = document.querySelector("#score-timer-container");
 const quizIntro = document.querySelector("#quiz-intro-container");
-const startButton = document.querySelector("#start-btn");
+const viewHighScores = document.querySelector(".highscore");
 const timer = document.querySelector(".timer");
+const startButton = document.querySelector("#start-btn");
 const questionContainer = document.querySelector("#question-container");
 const quizQuestion = document.querySelector("#question");
 const buttonsContainer = document.querySelector("#answers");
@@ -183,7 +184,11 @@ function showHighScores() {
   const playerInitials = document.querySelector("#initials").value;
 
   // Store the player's score in local storage
-  localStorage.setItem(playerInitials, totalScore);
+  if (playerInitials) {
+    let scoresArray = JSON.parse(localStorage.getItem("highScores")) || [];
+    scoresArray.push({ initials: playerInitials, score: totalScore });
+    localStorage.setItem("highScores", JSON.stringify(scoresArray));
+  }
 
   // Clear the quiz content and display the high scores
   scoresTimer.textContent = "";
@@ -207,19 +212,22 @@ function showHighScores() {
     "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 10px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 10px"
   );
 
-  // Display the high scores from local storage
-  for (const key in localStorage) {
-    if (localStorage.hasOwnProperty(key)) {
-      let currentPlayerScore = parseInt(localStorage.getItem(key));
-      const scoresList = document.createElement("li");
-      highscoresList.append(scoresList);
-      scoresList.textContent = `${key} - ${currentPlayerScore}`;
-      scoresList.setAttribute(
-        "style",
-        "padding: 5px 0; margin: 10px 10px; background-color: #c8e3ff; border: none; border-radius: 5px; font-weight: bold"
-      );
-    }
-  }
+  // Clear the previous list
+  highscoresList.textContent = "";
+
+  // Retrieve the high scores array from local storage
+  let scoresArray = JSON.parse(localStorage.getItem("highScores")) || [];
+
+  // Display the high scores
+  scoresArray.forEach((scoreEntry) => {
+    const scoresList = document.createElement("li");
+    highscoresList.append(scoresList);
+    scoresList.textContent = `${scoreEntry.initials} - ${scoreEntry.score}`;
+    scoresList.setAttribute(
+      "style",
+      "padding: 5px 0; margin: 10px 10px; background-color: #c8e3ff; border: none; border-radius: 5px; font-weight: bold"
+    );
+  });
 }
 
 // Navigate back to the home page when "Go Back" button is clicked
@@ -233,5 +241,8 @@ clearScoreBtn.addEventListener("click", () => {
   highscoresList.textContent = "";
 });
 
-// LAST THING TO DO:
-//Add the highscores to it's own HTML and JS files so that when the user clicks on the view highscores button, they are redirected to the highscores.html file.
+// Show highscore list when "View Highscores" button is clicked
+viewHighScores.addEventListener("click", (event) => {
+  event.preventDefault();
+  showHighScores();
+});
