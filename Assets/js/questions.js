@@ -1,3 +1,27 @@
+// Quiz elements
+const homePage = document.querySelector("#home-page-container");
+const scoresTimer = document.querySelector("#score-timer-container");
+const quizIntro = document.querySelector("#quiz-intro-container");
+const startButton = document.querySelector("#start-btn");
+const timer = document.querySelector(".timer");
+const questionContainer = document.querySelector("#question-container");
+const quizQuestion = document.querySelector("#question");
+const buttonsContainer = document.querySelector("#answers");
+const answerButtons = document.querySelectorAll(".answer-btn");
+const quizEndContainer = document.querySelector("#end-of-quiz-container");
+const endQuizHeader = document.querySelector("#end-of-quiz");
+const playerScore = document.querySelector("#player-score");
+const quizFeedback = document.querySelector("#quiz-feedback");
+const initialsInput = document.querySelector("#initials");
+const quizEndButton = document.querySelector("#end-btn");
+const highScoresContainer = document.querySelector(
+  "#high-scores-list-container"
+);
+const highscoresHeader = document.querySelector("#high-scores");
+const highscoresList = document.querySelector("#high-scores-list");
+const goBackBtn = document.querySelector("#go-back-btn");
+const clearScoreBtn = document.querySelector("#clear-scores-btn");
+
 // List of all questions, choices, and answers
 var questions = [
   {
@@ -33,30 +57,6 @@ var questions = [
     answer: "console.log",
   },
 ];
-
-// Quiz elements
-const homePage = document.querySelector("#home-page-container");
-const scoresTimer = document.querySelector("#score-timer-container");
-const quizIntro = document.querySelector("#quiz-intro-container");
-const startButton = document.querySelector("#start-btn");
-const timer = document.querySelector(".timer");
-const questionContainer = document.querySelector("#question-container");
-const quizQuestion = document.querySelector("#question");
-const buttonsContainer = document.querySelector("#answers");
-const answerButtons = document.querySelectorAll(".answer-btn");
-const quizEndContainer = document.querySelector("#end-of-quiz-container");
-const endQuizHeader = document.querySelector("#end-of-quiz");
-const playerScore = document.querySelector("#player-score");
-const quizFeedback = document.querySelector("#quiz-feedback");
-const initialsInput = document.querySelector("#initials");
-const quizEndButton = document.querySelector("#end-btn");
-const highScoresContainer = document.querySelector(
-  "#high-scores-list-container"
-);
-const highscoresHeader = document.querySelector("#high-scores");
-const highscoresList = document.querySelector("#high-scores-list");
-const goBackBtn = document.querySelector("#go-back-btn");
-const clearScoreBtn = document.querySelector("#clear-scores-btn");
 
 // Global variables
 let countdown = 60;
