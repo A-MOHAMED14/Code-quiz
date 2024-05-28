@@ -55,10 +55,11 @@ const quizFeedback = document.querySelector("#quiz-feedback");
 const initialsInput = document.querySelector("#initials");
 const quizEndButton = document.querySelector("#end-btn");
 // ----------------------------------------------------------------------------------------------------
-
+// Global variables
 let countdown = 60;
 let currentQuestionIndex = 0;
 let totalScore = 0;
+let currentPlayerId = 0;
 
 // ----------------------------------------------------------------------------------------------------
 // When "start quiz" button is clicked:
@@ -118,8 +119,12 @@ function handleAnswerClick(event) {
 
   if (selectedAnswer === currentQuestion.answer) {
     totalScore += 10;
+    const audio = new Audio("../Assets/sfx/correct.wav");
+    audio.play();
   } else {
     countdown -= 10;
+    const audio = new Audio("../Assets/sfx/incorrect.wav");
+    audio.play();
   }
 
   // When a button is clicked, move on to the next question
@@ -135,7 +140,6 @@ function handleAnswerClick(event) {
 }
 
 // ----------------------------------------------------------------------------------------------------
-let currentPlayerId = 0;
 
 // Once quiz ends, display users score, quiz feedback and get their initials
 
@@ -180,15 +184,8 @@ function endOfQuiz() {
     "style",
     "font-size: 1.2rem; font-weight: bold; margin-left: 15px; padding: 7px; color: white; background-color: #007bff; border: none; border-radius: 5px"
   );
-
-  // localStorage.clear();
-
-  // Store users score into the local storage object
-
-  // currentPlayerId++;
-  // localStorage.setItem(`player${currentPlayerId}Score`, totalScore);
-  // console.log(localStorage, "*** All the saved scores");
 }
+
 // ----------------------------------------------------------------------------------------------------
 const highScoresContainer = document.querySelector(
   "#high-scores-list-container"
@@ -202,9 +199,12 @@ const clearScoreBtn = document.querySelector("#clear-scores-btn");
 
 quizEndButton.addEventListener("click", (event) => {
   event.preventDefault();
+
   showHighScores();
 
   function showHighScores() {
+    // localStorage.clear();
+
     // Retreive the players initials
     const playerInitials = document.querySelector("#initials").value;
 
@@ -213,7 +213,7 @@ quizEndButton.addEventListener("click", (event) => {
 
     console.log(totalScore, "***** Player quiz score");
     console.log(playerInitials, "<---- Player initials");
-    // console.log(localStorage, "<<<<< Local storage object");
+    console.log(localStorage, "<<<<< Local storage object");
 
     scoresTimer.textContent = "";
     quizIntro.textContent = "";
@@ -261,7 +261,7 @@ quizEndButton.addEventListener("click", (event) => {
   }
 });
 
-// If Go back button is clicked, show quiz intro content
+// If the "Go Back" button is clicked, show quiz intro content
 
 goBackBtn.addEventListener("click", () => {
   goBackBtn.setAttribute("href", "http://127.0.0.1:3000/index.html");
