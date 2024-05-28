@@ -1,4 +1,4 @@
-// list of all questions, choices, and answers
+// List of all questions, choices, and answers
 var questions = [
   {
     title: "Commonly used data types DO NOT include:",
@@ -34,38 +34,37 @@ var questions = [
   },
 ];
 
-// Quiz Intro elements
+// Quiz elements
 const homePage = document.querySelector("#home-page-container");
 const scoresTimer = document.querySelector("#score-timer-container");
 const quizIntro = document.querySelector("#quiz-intro-container");
 const startButton = document.querySelector("#start-btn");
 const timer = document.querySelector(".timer");
-
-// Quiz questions elements
 const questionContainer = document.querySelector("#question-container");
 const quizQuestion = document.querySelector("#question");
 const buttonsContainer = document.querySelector("#answers");
 const answerButtons = document.querySelectorAll(".answer-btn");
-
-// End of quiz elements
 const quizEndContainer = document.querySelector("#end-of-quiz-container");
 const endQuizHeader = document.querySelector("#end-of-quiz");
 const playerScore = document.querySelector("#player-score");
 const quizFeedback = document.querySelector("#quiz-feedback");
 const initialsInput = document.querySelector("#initials");
 const quizEndButton = document.querySelector("#end-btn");
-// ----------------------------------------------------------------------------------------------------
+const highScoresContainer = document.querySelector(
+  "#high-scores-list-container"
+);
+const highscoresHeader = document.querySelector("#high-scores");
+const highscoresList = document.querySelector("#high-scores-list");
+const goBackBtn = document.querySelector("#go-back-btn");
+const clearScoreBtn = document.querySelector("#clear-scores-btn");
+
 // Global variables
 let countdown = 60;
 let currentQuestionIndex = 0;
 let totalScore = 0;
 let currentPlayerId = 0;
 
-// ----------------------------------------------------------------------------------------------------
-// When "start quiz" button is clicked:
-// 1. start timer
-// 2. show first question
-
+// Start the quiz and timer when the start button is clicked
 startButton.addEventListener("click", (event) => {
   const reduceTimer = setInterval(() => {
     if (countdown > 0) {
@@ -81,16 +80,13 @@ startButton.addEventListener("click", (event) => {
   showQuestion();
 });
 
-// ----------------------------------------------------------------------------------------------------
-// Functionality to show next question when one of the answer buttons is clicked
-
+// Display the current question and its choices
 function showQuestion() {
-  quizQuestion.textContent = `${questions[currentQuestionIndex].title}`;
+  quizQuestion.textContent = questions[currentQuestionIndex].title;
   quizQuestion.setAttribute("style", "text-align: left");
 
   answerButtons.forEach((button, i) => {
-    button.textContent = `${questions[currentQuestionIndex].choices[i]}`;
-
+    button.textContent = questions[currentQuestionIndex].choices[i];
     buttonsContainer.setAttribute(
       "style",
       "text-align: left; margin-top: 20px; list-style:none"
@@ -99,7 +95,6 @@ function showQuestion() {
       "style",
       "text-align: left; padding: 7px; font-size: 1.5rem; margin: 3px 0; border-radius: 5px; border: none; background-color: #007bff; color: white"
     );
-
     button.onclick = handleAnswerClick;
   });
 
@@ -109,13 +104,10 @@ function showQuestion() {
   );
 }
 
-// handle the selected answer
-
+// Handle the selected answer
 function handleAnswerClick(event) {
   const currentQuestion = questions[currentQuestionIndex];
-  selectedAnswer = event.target.textContent;
-  console.log(selectedAnswer, "<------ Selected Answer");
-  console.log(currentQuestion.answer, "***** The correct answer");
+  const selectedAnswer = event.target.textContent;
 
   if (selectedAnswer === currentQuestion.answer) {
     totalScore += 10;
@@ -127,29 +119,25 @@ function handleAnswerClick(event) {
     audio.play();
   }
 
-  // When a button is clicked, move on to the next question
+  // Move to the next question or end the quiz if it's the last question
   currentQuestionIndex++;
 
   if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
     countdown = 0;
-    // If quiz or timer has ended invoke endOfQuiz funtion
     endOfQuiz();
   }
 }
 
-// ----------------------------------------------------------------------------------------------------
-
-// Once quiz ends, display users score, quiz feedback and get their initials
-
+// Display the end of quiz screen with the user's score and feedback
 function endOfQuiz() {
   quizIntro.textContent = "";
   questionContainer.textContent = "";
 
   playerScore.textContent = `You scored ${totalScore}/50`;
 
-  // Provide feedback based on score
+  // Provide feedback based on the score
   if (totalScore === 50) {
     quizFeedback.textContent = "You smashed it! 💯 Outstanding performance! 🌟";
   } else if (totalScore === 40) {
@@ -173,7 +161,6 @@ function endOfQuiz() {
     "style",
     "display: contents; text-align: center; margin: 0 auto; width: 50%"
   );
-
   endQuizHeader.setAttribute("style", "margin: 0 0 40px 0");
   quizFeedback.setAttribute("style", "margin: 20px 0");
   initialsInput.setAttribute(
@@ -186,89 +173,61 @@ function endOfQuiz() {
   );
 }
 
-// ----------------------------------------------------------------------------------------------------
-const highScoresContainer = document.querySelector(
-  "#high-scores-list-container"
-);
-const highscoresHeader = document.querySelector("#high-scores");
-const highscoresList = document.querySelector("#high-scores-list");
-const goBackBtn = document.querySelector("#go-back-btn");
-const clearScoreBtn = document.querySelector("#clear-scores-btn");
-
-// When the user selects the submit button, they are presented with the highscores list
-
+// Show the high scores list when the submit button is clicked
 quizEndButton.addEventListener("click", (event) => {
   event.preventDefault();
-
   showHighScores();
+});
 
-  function showHighScores() {
-    // localStorage.clear();
+function showHighScores() {
+  const playerInitials = document.querySelector("#initials").value;
 
-    // Retreive the players initials
-    const playerInitials = document.querySelector("#initials").value;
+  // Store the player's score in local storage
+  localStorage.setItem(playerInitials, totalScore);
 
-    // Store the players score to the local storage object
-    localStorage.setItem(playerInitials, totalScore);
+  // Clear the quiz content and display the high scores
+  scoresTimer.textContent = "";
+  quizIntro.textContent = "";
+  questionContainer.textContent = "";
+  quizEndContainer.textContent = "";
 
-    console.log(totalScore, "***** Player quiz score");
-    console.log(playerInitials, "<---- Player initials");
-    console.log(localStorage, "<<<<< Local storage object");
+  highScoresContainer.setAttribute(
+    "style",
+    "display: block; text-align: center; margin: 0 auto; width: 50%"
+  );
+  highscoresHeader.setAttribute("style", "margin-bottom: 30px");
+  highscoresList.setAttribute("style", "list-style: none; margin-bottom: 30px");
 
-    scoresTimer.textContent = "";
-    quizIntro.textContent = "";
-    questionContainer.textContent = "";
-    quizEndContainer.textContent = "";
+  goBackBtn.setAttribute(
+    "style",
+    "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 10px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 10px"
+  );
+  clearScoreBtn.setAttribute(
+    "style",
+    "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 10px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 10px"
+  );
 
-    highScoresContainer.setAttribute(
-      "style",
-      "display: block; text-align: center; margin: 0 auto; width: 50%"
-    );
-    highscoresHeader.setAttribute("style", "margin-bottom: 30px");
-
-    highscoresList.setAttribute(
-      "style",
-      "list-style: none; margin-bottom: 30px"
-    );
-
-    goBackBtn.setAttribute(
-      "style",
-      "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 10px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 10px"
-    );
-    clearScoreBtn.setAttribute(
-      "style",
-      "text-align: center; font-size: 1.3rem; font-weight: bold; padding: 10px; margin-right: 10px; background-color:#007bff; color: white; border: none; border-radius: 10px"
-    );
-
-    // Loop through the properties of the local storage object, for each property, create a new li
-
-    let allPlayers = localStorage;
-
-    for (const key in allPlayers) {
-      if (key.length === 2) {
-        console.log(key, "<=== All property keys");
-        let currentPlayerScore = parseInt(localStorage.getItem(key));
-
-        const scoresList = document.createElement("li");
-        highscoresList.append(scoresList);
-        scoresList.textContent = `${key} - ${currentPlayerScore}`;
-        scoresList.setAttribute(
-          "style",
-          "padding: 5px 0; margin: 10px 10px; background-color: #c8e3ff; border: none; border-radius: 5px; font-weight: bold"
-        );
-      }
+  // Display the high scores from local storage
+  for (const key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+      let currentPlayerScore = parseInt(localStorage.getItem(key));
+      const scoresList = document.createElement("li");
+      highscoresList.append(scoresList);
+      scoresList.textContent = `${key} - ${currentPlayerScore}`;
+      scoresList.setAttribute(
+        "style",
+        "padding: 5px 0; margin: 10px 10px; background-color: #c8e3ff; border: none; border-radius: 5px; font-weight: bold"
+      );
     }
   }
-});
+}
 
-// If the "Go Back" button is clicked, show quiz intro content
-
+// Navigate back to the home page when "Go Back" button is clicked
 goBackBtn.addEventListener("click", () => {
-  goBackBtn.setAttribute("href", "http://127.0.0.1:3000/index.html");
+  window.location.href = "index.html";
 });
 
-// If the clear button is clicked, simply remove all key value pairs from the local storage object
-
+// Clear all high scores when "Clear High Scores" button is clicked
 clearScoreBtn.addEventListener("click", () => {
   localStorage.clear();
   highscoresList.textContent = "";
